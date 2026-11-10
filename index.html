@@ -33,6 +33,16 @@ body.lg.cvo #cv3 .lr.sel{background:var(--acs)}
 #slp{position:absolute!important;left:0!important;right:0!important;top:auto!important;bottom:52px!important;min-width:0!important;padding:6px;border-radius:16px;z-index:5;max-height:220px;overflow:auto}#slp button{display:flex;width:100%;gap:10px;align-items:center;padding:10px 12px;border:none;background:none;border-radius:12px;color:var(--tx);font:inherit;text-align:left;cursor:pointer}#slp button.on,#slp button:hover{background:color-mix(in srgb,var(--ac) 8%,transparent)}#slp b{color:var(--ac);font-weight:500}
 :focus-visible{outline:2px solid var(--ac)!important;outline-offset:2px}button:focus:not(:focus-visible){outline:none}
 .nav button,.rail button,.rc,.cvb{min-width:44px;min-height:44px}@media(max-width:480px){.hd .hb{width:40px!important;height:40px!important}.hd>div:first-child>div:last-child{gap:2px!important}.hd .cmp{font-size:13px!important}}
+
+/* v37 · chat interno proporcional */
+body.chs #sheet .sp2{display:flex;flex-direction:column}
+body.chs .ich{flex:1;min-height:0;max-height:none!important}
+body.chs .icb{flex-shrink:0;margin-top:auto}
+body.lg.chs #sheet .sp2{width:420px;height:100%;padding:24px 24px 28px}
+body:not(.lg).chs #sheet .sp2{height:78%}
+body.chs .ich:empty::before{content:"Nenhuma mensagem ainda";margin:auto;color:var(--mu);font-size:13px}
+body.chs .ichd{flex-shrink:0}
+body.chs #stp{max-height:50vh;overflow:auto}
 #mode{display:none!important}.pop .pi{cursor:pointer}</style>
 </head>
 <body>
@@ -185,7 +195,13 @@ const mR=new THREE.Mesh(gR,[new THREE.MeshBasicMaterial({color:0xEC1D25}),new TH
 const mW=new THREE.Mesh(gW,[new THREE.MeshBasicMaterial({color:0xFFFFFF}),new THREE.MeshStandardMaterial({color:0xD5DAE3,roughness:.4})]);
 const gl=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{u:{value:-3}},vertexShader:'varying vec2 p;void main(){p=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'uniform float u;varying vec2 p;void main(){float d=abs((p.x+p.y*.55)-u);float a=smoothstep(.28,0.,d)*.55;gl_FragColor=vec4(vec3(a),a);}'});
 const mG=new THREE.Mesh(new THREE.ShapeGeometry(shp(TRI)),gl);mG.position.z=.322;
-const G=new THREE.Group();G.add(mR,mW,mG);G.position.z=-.18;const Wr=new THREE.Group();Wr.add(G);S.add(Wr);
+const G=new THREE.Group();G.add(mR,mW,mG);{const d=new Date(),m=d.getMonth(),dd=d.getDate();if((m==10&&dd>=1)||m==11||(m==0&&dd<=6)){const H=new THREE.Group();
+const wM=new THREE.MeshStandardMaterial({color:0xF4F4F2,roughness:.9}),rM=new THREE.MeshStandardMaterial({color:0xC40E1E,emissive:0x4A0006,roughness:.55,side:THREE.DoubleSide});
+const hc=new THREE.ConeGeometry(.25,.7,40,1,true);hc.translate(0,.33,0);const cone=new THREE.Mesh(hc,rM);cone.rotation.z=-.42;cone.position.set(0,.1,0);
+const tip=new THREE.Vector3(0,.66,0).applyEuler(cone.rotation).add(cone.position);
+const pom=new THREE.Mesh(new THREE.SphereGeometry(.12,28,20),wM);pom.position.copy(tip);
+const brim=new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.17,48),wM);brim.position.set(0,.08,.04);brim.scale.set(1,1,.8);
+H.add(cone,brim,pom);H.position.set(-.02,.6,.22);H.rotation.z=.06;H.scale.setScalar(1.3);G.add(H)}}G.position.z=-.18;const Wr=new THREE.Group();Wr.add(G);S.add(Wr);
 S.add(new THREE.AmbientLight(0xffffff,.45));const keyL=new THREE.DirectionalLight(0xffffff,1.6);keyL.position.set(-2.5,3,4);S.add(keyL);const rim=new THREE.DirectionalLight(0xffffff,1);rim.position.set(2.5,2.5,-3);S.add(rim);
 const spring=t=>t>=1?1:1-Math.exp(-6.5*t)*Math.cos(9*t);const t0=performance.now(),ENT=900;let gT=t0+700;
 (function f(now){if(!$('login').classList.contains('on')){requestAnimationFrame(f);return}
@@ -559,7 +575,7 @@ const brl=v=>'R$ '+Math.round(v).toLocaleString('pt-BR');
 function mc(){return {i:'flag',g:'Meta do mês',t:Math.round(REAL/META*100)+'% da meta',s:'Faltam '+brl(META-REAL)+' · '+rest+' dias'}}
 CARDS.splice(1,0,mc(),{i:'rain',g:'Previsão · Imperatriz',t:'Chuva à tarde',s:'Lembre o cliente do tempo de secagem em área externa'});
 CARDS.splice(4,0,{i:'cal',g:'Feriado',t:'Proclamação da República',s:'Domingo, 15/11 · avise quem tem orçamento aberto'});
-window._mcUp=()=>{CARDS[1]=mc();try{card()}catch(e){}};
+window._mcUp=()=>{CARDS[1]=mc();try{card()}catch(e){}};window._setMeta=v=>{META=v;window._mcUp()};window._getMeta=()=>META;
 /* 2 · meta na Análise */
 const oa=anv;anv=function(){oa.apply(this,arguments);const v=$('an3');if(!v)return;const gest=adm||pf.c=='Supervisor';
 const sh=[.3,.26,.24,.2];const pc=x=>Math.min(100,Math.round(x*100));
@@ -570,7 +586,7 @@ const ref=v.children[1]||null;v.insertBefore(w,ref);
 setTimeout(()=>w.querySelectorAll('.mtb i').forEach(i=>i.style.width=i.dataset.w+'%'),60);
 if(adm)w.onclick=()=>{sheet('<div class="sh-t">Meta do mês</div><label>Meta da empresa</label><input id="mtx" inputmode="numeric" value="'+brl(META)+'"><div class="hint" style="margin-top:8px">Dividida entre os vendedores pelo histórico de cada um.</div><button class="pr" id="mts" style="width:100%;margin-top:16px">Salvar</button>');
 $('mtx').oninput=e=>{const d=e.target.value.replace(/\D/g,'');e.target.value=d?brl(+d):''};
-$('mts').onclick=()=>{const d=+$('mtx').value.replace(/\D/g,'');if(d){META=d;window._mcUp()}fecha();setTimeout(anv,320);toast('Meta atualizada')}}};
+$('mts').onclick=()=>{const d=+$('mtx').value.replace(/\D/g,'');if(d){META=d;window._mcUp();window._onMeta&&window._onMeta(d)}fecha();setTimeout(anv,320);toast('Meta atualizada')}}};
 /* 4 · aprovar todos os pedidos de acesso */
 const oe=eqv;eqv=function(){oe.apply(this,arguments);const pl=$('pl2');if(!pl||PED.length<2)return;const b=document.createElement('button');b.className='sc apt2';b.textContent='Aprovar todos';pl.after(b);
 b.onclick=()=>{tom&&tom(560);pl.querySelectorAll('.sw').forEach((sw,k)=>setTimeout(()=>{sw.querySelector('.swf').style.transform='translateX(110%)';sw.style.height=sw.offsetHeight+'px';setTimeout(()=>{sw.style.height='0';sw.style.opacity='0'},240)},k*70));
@@ -638,7 +654,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='1.2';
+(function(){try{MS.info='info'}catch(e){}const VER='1.3.1';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -696,6 +712,8 @@ document.addEventListener('keydown',e=>{const p=$('slp');if(!p||e.target.id!='tx
 if(e.key=='ArrowDown'||e.key=='ArrowUp'){e.preventDefault();i=(i+(e.key=='ArrowDown'?1:-1)+bs.length)%bs.length;bs.forEach((b,k)=>b.classList.toggle('on',k==i))}
 else if((e.key=='Enter'||e.key=='Tab')&&bs[i]){e.preventDefault();e.stopImmediatePropagation();bs[i].dispatchEvent(new MouseEvent('mousedown'))}else if(e.key=='Escape')p.remove()},true);
 })();
+
+(function(){const os=sheet;sheet=function(h){const c=/id="chl"/.test(h);document.body.classList.toggle('chs',c);if(c)h='<div class="sh-t" style="margin-bottom:12px">Chat da equipe</div>'+h;return os.apply(this,[h])};const of=fecha;fecha=function(){document.body.classList.remove('chs');return of.apply(this,arguments)}})();
 /* ===== CAMADA REAL · Firebase ===== */
 (function(){
 firebase.initializeApp({apiKey:"AIzaSyDwIiG1wwHTYEa2x91VliP83ytkYaLXG2Y",authDomain:"decor-atendimento.firebaseapp.com",projectId:"decor-atendimento",storageBucket:"decor-atendimento.firebasestorage.app",messagingSenderId:"140489342933",appId:"1:140489342933:web:571677e551878eb465075c"});
@@ -720,7 +738,7 @@ function rota(u){if(unU)unU();unU=db.collection('users').doc(u.uid).onSnapshot(d
 if(!UD){if(!pf.n)pf.n=u.displayName||'';if(!$('setup').classList.contains('on')){e=0;show('setup');go()}return}
 pf.n=UD.n;pf.c=UD.c;pf.l=UD.l;pf.s=UD.s;pf.f=UD.f||null;adm=!!UD.adm;
 if(!UD.ap){if(!$('setup').classList.contains('on'))show('setup');e=2;go();return}
-if(!$('home').classList.contains('on')&&!d.metadata.hasPendingWrites){entraHome();setTimeout(vivo,400)}},()=>{})}
+if(!$('home').classList.contains('on')&&!d.metadata.hasPendingWrites){try{aplicaPref(UD.pref)}catch(e){}entraHome();setTimeout(()=>{vivo();try{ligaLoja();diarioReal()}catch(e){}},400)}},()=>{})}
 au.onAuthStateChanged(u=>{U=u;if(u)rota(u);else if(!booting){location.reload()}booting=false});
 /* etapa 2: salvar perfil */
 const s1o=s1;s1=function(){s1o();const nx=$('nx');nx.onclick=async()=>{if(!pf.l){$('er2').textContent='Escolha sua loja.';return}if(!pf.s){$('er2').textContent='Escolha seu setor.';return}
@@ -759,6 +777,45 @@ aprova=function(i,sim){const sw=document.querySelector('.sw[data-i="'+i+'"]'),p=
 const r=db.collection('users').doc(p.id);(sim?r.update({ap:true}):r.delete()).then(()=>toast(sim?p.n.split(' ')[0]+' aprovado':'Pedido recusado')).catch(()=>{toast('Sem permissão ou sem internet');eqv()})};
 const eqo=eqv;eqv=function(){eqo.apply(this,arguments);const b=document.querySelector('.apt2');if(b)b.onclick=()=>{const bt=db.batch();PED.forEach(p=>bt.update(db.collection('users').doc(p.id),{ap:true}));bt.commit().then(()=>toast('Todos aprovados')).catch(()=>toast('Sem permissão ou sem internet'))};
 document.querySelectorAll('#ev [data-f]').forEach(t=>t.addEventListener('click',()=>{const m=MEM[+t.dataset.f];if(m&&m.id&&adm)db.collection('users').doc(m.id).update({fv:!m.f}).catch(()=>{})}))};
+})();
+/* ===== dados persistentes da loja e preferências ===== */
+(function(){
+const db=firebase.firestore(),au=firebase.auth();const ref=db.collection('config').doc('loja');
+const ARR={LOJAS,REV,LAC,KB,QRS,ETQ,FX,PR,CORES,RG},OBJ={END,RT,EMP};let last='',tm=0,ok=false;
+const pack=()=>{const o={};for(const k in ARR)o[k]=JSON.stringify(ARR[k]);for(const k in OBJ)o[k]=JSON.stringify(OBJ[k]);o.zm=zm;o.meta=window._getMeta?window._getMeta():0;return o};
+const salvar=()=>{if(!ok||!au.currentUser)return;clearTimeout(tm);tm=setTimeout(()=>{const o=pack(),s=JSON.stringify(o);if(s==last)return;last=s;ref.set(o,{merge:true}).catch(()=>{try{netErr(true)}catch(e){}})},500)};
+window.salvarLoja=salvar;
+function aplicar(d){for(const k in ARR)if(d[k]){try{const v=JSON.parse(d[k]);ARR[k].length=0;Array.prototype.push.apply(ARR[k],v)}catch(e){}}
+for(const k in OBJ)if(d[k]){try{const v=JSON.parse(d[k]);Object.keys(OBJ[k]).forEach(x=>delete OBJ[k][x]);Object.assign(OBJ[k],v)}catch(e){}}
+if(d.zm)zm=d.zm;if(d.meta&&window._setMeta)window._setMeta(d.meta);last=JSON.stringify(pack());
+try{expR()}catch(e){}try{badges();bdgC()}catch(e){}
+if(!$('sheet').classList.contains('on')){const on=document.querySelector('.nav button.on');if(on&&on.dataset.t!='inicio')try{tab(on.dataset.t)}catch(e){}}}
+let un=null;window.ligaLoja=()=>{if(un)return;un=ref.onSnapshot(s=>{if(s.metadata.hasPendingWrites)return;if(s.exists)aplicar(s.data());ok=true;if(!s.exists)salvar()},()=>{try{netErr(true)}catch(e){}})};
+const of=fecha;fecha=function(){const r=of.apply(this,arguments);salvar();return r};
+const oe=expR;expR=function(){const r=oe.apply(this,arguments);salvar();return r};
+window._onMeta=()=>salvar();
+const rp=REV.push;REV.push=function(){const r=Array.prototype.push.apply(REV,arguments);salvar();return r};
+/* preferências da pessoa */
+const pr=()=>{const u=au.currentUser;if(u)db.collection('users').doc(u.uid).update({pref:{dk:!!dark,som:!!som,vib:!!vib}}).catch(()=>{})};
+const otm=tema;tema=function(){const r=otm.apply(this,arguments);pr();return r};
+const ons=notS;notS=function(){const r=ons.apply(this,arguments);document.querySelectorAll('#sheet .tg').forEach(b=>b.addEventListener('click',()=>setTimeout(pr,50)));return r};
+window.aplicaPref=p=>{if(!p)return;if(!!p.dk!=!!dark)otm();if('som' in p)som=p.som;if('vib' in p)vib=p.vib};
+/* editar perfil salva no banco */
+const opf=perfilS;perfilS=function(){opf.apply(this,arguments);const b=$('ps');if(b)b.addEventListener('click',()=>{const u=au.currentUser;if(u)db.collection('users').doc(u.uid).update({n:pf.n,c:pf.c}).catch(()=>{})})};
+/* Diário de Bordo com dados reais: data, feriado, previsão */
+const MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],SEM=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const FER=[['01-01','Confraternização Universal'],['04-21','Tiradentes'],['05-01','Dia do Trabalho'],['07-16','Aniversário de Imperatriz'],['07-28','Adesão do Maranhão à Independência'],['09-07','Independência do Brasil'],['10-12','Nossa Senhora Aparecida'],['11-02','Finados'],['11-15','Proclamação da República'],['11-20','Consciência Negra'],['12-25','Natal'],['2027-03-26','Sexta-feira Santa'],['2027-05-27','Corpus Christi'],['2027-02-08','Carnaval (ponto facultativo)'],['2028-04-14','Sexta-feira Santa'],['2028-06-15','Corpus Christi'],['2028-02-28','Carnaval (ponto facultativo)']];
+function diario(){const h=new Date();h.setHours(0,0,0,0);const f=d=>SEM[d.getDay()]+', '+d.getDate()+' de '+MES[d.getMonth()];
+const L=[];for(const y of [h.getFullYear(),h.getFullYear()+1])FER.forEach(([d,n])=>{const s=d.length==5?y+'-'+d:d;if(s.startsWith(String(y))){const dt=new Date(s+'T00:00:00');if(dt>=h)L.push([dt,n])}});L.sort((a,b)=>a[0]-b[0]);
+const prox=L[0];const dias=prox?Math.round((prox[0]-h)/864e5):99;
+try{CARDS[0].g=f(new Date());const hr=new Date().getHours();CARDS[0].t=hr<12?'Bom dia para vender':hr<18?'Boa tarde para vender':'Boa noite';CARDS[0].s=prox?'Próximo feriado: '+prox[0].getDate()+' de '+MES[prox[0].getMonth()]:'';
+const fi=CARDS.findIndex(c=>c.g=='Feriado');if(fi>=0){if(prox&&dias<=10){CARDS[fi].t=prox[1];CARDS[fi].s=(dias==0?'Hoje':dias==1?'Amanhã':f(prox[0]))+' · avise quem tem orçamento aberto'}else CARDS.splice(fi,1)}
+const ci2=CARDS.findIndex(c=>c.i=='cal'&&c.g=='Compromissos');if(ci2>=0)CARDS.splice(ci2,1);
+['Tarefas','Dica do Zac','Campanha'].forEach(g=>{const i=CARDS.findIndex(c=>c.g==g);if(i>=0)CARDS.splice(i,1)});card()}catch(e){}
+fetch('https://api.open-meteo.com/v1/forecast?latitude=-5.5264&longitude=-47.4917&daily=precipitation_probability_max,temperature_2m_max&timezone=America%2FSao_Paulo&forecast_days=1').then(r=>r.json()).then(j=>{
+const p=j.daily.precipitation_probability_max[0],tx=j.daily.temperature_2m_max[0];const w=CARDS.find(c=>c.i=='rain');if(!w)return;w.g='Previsão · Imperatriz';
+if(p>=60){w.t='Chuva prevista hoje';w.s='Lembre o cliente do tempo de secagem em área externa'}else if(tx>=34){w.t='Dia muito quente';w.s='Oriente aplicar cedo ou no fim da tarde'}else{w.t='Tempo firme';w.s='Bom dia para pintura externa'}try{card()}catch(e){}}).catch(()=>{const i=CARDS.findIndex(c=>c.i=='rain');if(i>=0)CARDS.splice(i,1)})}
+window.diarioReal=diario;
 })();
 </script>
 </body>
