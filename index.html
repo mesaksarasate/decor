@@ -702,8 +702,8 @@ function mapa(txt,mine){return '<div class="bl '+(mine?'v':'c')+' lcb"><div clas
 function abre(i){const c=CV[i];
 const bal=m=>m[0]=='s'?'<div class="sy">'+m[1]+'</div>':m[0]=='lc'?mapa(m[1],false):m[0]=='lv'?mapa(m[1],true):'<div class="bl '+m[0]+'">'+(m[0]=='z'?'<small>Zac</small>':'')+m[1]+'</div>';
 const etp=()=>'<div class="etp">'+ETP.map((e,k)=>'<button data-e="'+k+'" class="'+(k<c.e?'dn':k==c.e?'on':'')+'"><i></i><span>'+e+'</span></button>').join('')+'</div>';
-sheet('<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><div class="av">'+ini2(c.n)+'</div><div style="flex:1;min-width:0"><div class="nm">'+c.n+'</div><div class="sb">'+c.l+'</div></div><span id="sic">'+stIc(c)+'</span></div><div id="etw">'+etp()+'</div><div class="msgs" id="ms">'+c.m.map(bal).join('')+'</div><div id="cb"></div>');
-const ms=$('ms');const rr=()=>{ms.innerHTML=c.m.map(bal).join('');ms.scrollTop=ms.scrollHeight;$('sic').innerHTML=stIc(c)};rr();
+sheet('<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><div class="av">'+ini2(c.n)+'</div><div style="flex:1;min-width:0;cursor:pointer" id="abf"><div class="nm">'+c.n+'</div><div class="sb">'+c.l+'</div></div><span id="sic">'+stIc(c)+'</span></div><div id="etw">'+etp()+'</div><div class="msgs" id="ms">'+c.m.map(bal).join('')+'</div><div id="cb"></div>');
+$('abf').onclick=()=>fichaC(c,'d');const ms=$('ms');const rr=()=>{ms.innerHTML=c.m.map(bal).join('');ms.scrollTop=ms.scrollHeight;$('sic').innerHTML=stIc(c)};rr();
 const bE=()=>{$('etw').innerHTML=etp();document.querySelectorAll('.etp [data-e]').forEach(b=>b.onclick=()=>{const k=+b.dataset.e;if(c.s=='w'||c.s=='z'||c.s=='ok')return;if(k==4){conclui(c);return}c.e=k;bE()})};bE();
 const bar=()=>{if(c.s=='w'||c.s=='z'){$('cb').innerHTML='<button class="pr" id="as" style="width:100%;margin-top:12px">Assumir atendimento</button>';$('as').onclick=()=>{tom(560);c.s='me';c.e=1;c.m.push(['s','Você assumiu o atendimento']);rr();bE();bar();cvv()}}
 else if(c.s=='ok'){$('cb').innerHTML='<div class="sy" style="margin:12px auto 0;display:table">'+(c.r?c.r:'Concluído')+'</div>'}
@@ -730,9 +730,11 @@ function ctv(){const v=$('ct3');const L2=CV.filter(c=>c.n.toLowerCase().includes
 v.innerHTML='<div style="position:relative"><input id="bq" placeholder="Buscar contato" value="'+q+'" style="padding-left:44px"><svg class="i" style="position:absolute;left:15px;top:15px;color:var(--mu)"><use href="#search"/></svg></div><div class="card">'+(L2.length?L2.map(c=>'<div class="lr ck" data-i="'+CV.indexOf(c)+'"><div class="av">'+ini2(c.n)+'</div><div style="flex:1"><div class="nm">'+c.n+'</div><div class="sb">'+c.h[0]+'</div></div><svg class="i" style="width:18px;height:18px;color:var(--mu)"><use href="#chev"/></svg></div>').join(''):'<div style="padding:30px;text-align:center" class="hint">Nenhum contato</div>')+'</div>';
 const b=$('bq');b.oninput=()=>{q=b.value;const p=b.selectionStart;ctv();const n=$('bq');n.focus();n.setSelectionRange(p,p)};
 v.querySelectorAll('.ck').forEach(r=>r.onclick=()=>fichaC(CV[+r.dataset.i]))}
-function fichaC(c,tb){tb=tb||'r';const vs=REC.filter(x=>x.c==c.n);const T={r:'<div class="rowx"><span>Loja</span><span class="sb">'+c.l+'</span></div><div class="rowx"><span>Etapa</span><span class="sb">'+ETP[c.e]+'</span></div><div class="rowx"><span>Compras registradas</span><span class="sb">'+vs.length+'</span></div>',h:c.h.map(x=>'<div class="rowx"><span>'+x+'</span></div>').join('')+vs.map(x=>'<div class="rowx"><span>Venda · '+x.v+'</span><span class="sb">'+x.fp+'</span></div>').join(''),d:'<div class="rowx"><span>Nome</span><span class="sb">'+c.n+'</span></div><div class="rowx"><span>WhatsApp</span><span class="sb">(99) 9 0000-0000</span></div><div class="rowx"><span>Etiquetas</span><span class="sb">'+ETQ.slice(0,2).join(', ')+'</span></div>'};
+function fichaC(c,tb){tb=tb||'r';const vs=REC.filter(x=>x.c==c.n);const T={r:'<div class="rowx"><span>Loja</span><span class="sb">'+c.l+'</span></div><div class="rowx"><span>Etapa</span><span class="sb">'+ETP[c.e]+'</span></div><div class="rowx"><span>Compras registradas</span><span class="sb">'+vs.length+'</span></div>',h:c.h.map(x=>'<div class="rowx"><span>'+x+'</span></div>').join('')+vs.map(x=>'<div class="rowx"><span>Venda · '+x.v+'</span><span class="sb">'+x.fp+'</span></div>').join(''),d:'<div class="rowx"><span>Nome</span><span class="sb">'+c.n+'</span></div><div class="rowx"><span>WhatsApp</span><span class="sb">'+(c.tel||'')+'</span></div><div class="sh-t" style="margin-top:16px;font-size:14px">Tipo</div><div class="seg" id="tpc"><button class="on" data-t="c">Cliente</button><button data-t="p">Pessoal</button></div><div class="sh-t" style="margin-top:16px;font-size:14px">Etiquetas</div><div class="chips" id="tgc">'+ETQ.map(x=>'<span class="chip'+((c.tg||[]).includes(x)?' on':'')+'" data-g="'+x.replace(/"/g,'')+'">'+x+'</span>').join('')+'</div>'};
 sheet('<div style="text-align:center"><div class="av" style="width:68px;height:68px;font-size:21px;margin:0 auto">'+ini2(c.n)+'</div><div style="font-size:18px;font-weight:500;margin-top:10px">'+c.n+'</div></div><div class="seg" style="margin:16px 0 4px">'+[['r','Resumo'],['h','Histórico'],['d','Dados']].map(x=>'<button data-tb="'+x[0]+'" class="'+(x[0]==tb?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+T[tb]+'<button class="pr" id="ab" style="width:100%;margin-top:16px">Abrir conversa</button>');
-document.querySelectorAll('[data-tb]').forEach(b=>b.onclick=()=>fichaC(c,b.dataset.tb));$('ab').onclick=()=>{fecha();setTimeout(()=>{tab('conversas');abre(CV.indexOf(c))},320)}}
+document.querySelectorAll('[data-tb]').forEach(b=>b.onclick=()=>fichaC(c,b.dataset.tb));
+if($('tpc'))$('tpc').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{if(b.dataset.t=='p'){tipoC(c,'p');fecha()}});
+if($('tgc'))$('tgc').querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{const g=b.dataset.g,a=(c.tg||[]).slice(),i=a.indexOf(g);if(i<0)a.push(g);else a.splice(i,1);c.tg=a;b.classList.toggle('on');ref(c.id).update({tg:a}).catch(()=>toast('Sem conexão'))});$('ab').onclick=()=>{fecha();setTimeout(()=>{tab('conversas');abre(CV.indexOf(c))},320)}}
 /* ===== FLUXO ===== */
 const FX=[
 {k:'oi',t:'Boas-vindas',on:true,msg:['{saudação}, {nome}!','Aqui é o Zac, assistente virtual da Auto Tintas Decor.']},
@@ -845,7 +847,8 @@ const QRS=['Valor com desconto','Entrega hoje?','Envio o Pix agora'],ETQ=['Clien
 const EMP={f:'Auto Tintas Decor',r:'Tocantins Auto Tintas Ltda',c:''};
 function sttS(){stPop();return;sheet('<div class="sh-t">Status</div><div class="chips" id="sx2"></div>');chips('sx2',Object.keys(STC),ST2,v=>{ST2=v;$('hst').style.background=STC[v];setTimeout(()=>{fecha();setTimeout(ajv,300)},250)})}
 function elS(){const L=(a,id)=>'<div class="chips" id="'+id+'">'+a.map((x,i)=>'<span class="chip" style="display:inline-flex;align-items:center;gap:6px">'+x+'<button data-d="'+i+'" style="border:none;background:none;color:var(--mu);padding:0;display:flex"><svg class="i" style="width:14px;height:14px"><use href="#x"/></svg></button></span>').join('')+'</div>';
-sheet('<div class="sh-t">Respostas rápidas</div>'+L(QRS,'eq1')+'<div style="display:flex;gap:8px;margin-top:10px"><input id="nq" placeholder="Nova resposta" style="height:42px"><button class="sm" id="aq" style="height:42px">Adicionar</button></div><div class="sh-t" style="margin-top:22px">Etiquetas</div>'+L(ETQ,'eq2')+'<div style="display:flex;gap:8px;margin-top:10px"><input id="ne" placeholder="Nova etiqueta" style="height:42px"><button class="sm" id="ae" style="height:42px">Adicionar</button></div>');
+sheet('<div class="sh-t">Respostas rápidas</div>'+L(QRS,'eq1')+'<div style="display:flex;gap:8px;margin-top:10px"><input id="nq" placeholder="Nova resposta" style="height:42px"><button class="sm" id="aq" style="height:42px">Adicionar</button></div><div class="sh-t" style="margin-top:22px">Etiquetas</div>'+L(ETQ,'eq2')+'<div style="display:flex;gap:8px;margin-top:10px"><input id="ne" placeholder="Nova etiqueta" style="height:42px"><button class="sm" id="ae" style="height:42px">Adicionar</button></div>'+(()=>{const P=Object.entries((MOTOR&&MOTOR.pes)||{});return '<div class="sh-t" style="margin-top:22px">Contatos pessoais <span class="sb" style="font-weight:400">'+P.length+'</span></div><div style="max-height:260px;overflow:auto">'+P.sort((a,b)=>a[1].localeCompare(b[1])).map(x=>'<div class="rowx"><span>'+x[1]+'</span><button class="sm" data-cl="'+x[0]+'" style="height:32px">Tornar cliente</button></div>').join('')+'</div>'})());
+document.querySelectorAll('[data-cl]').forEach(b=>b.onclick=()=>{tipoC({id:b.dataset.cl},'c');b.closest('.rowx').remove()});
 $('eq1').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{QRS.splice(+b.dataset.d,1);elS()});$('eq2').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{ETQ.splice(+b.dataset.d,1);elS()});
 $('aq').onclick=()=>{const v=$('nq').value.trim();if(v){QRS.push(v);elS()}};$('ae').onclick=()=>{const v=$('ne').value.trim();if(v){ETQ.push(v);elS()}}}
 function empS(){sheet('<div class="sh-t">Dados da empresa</div><label>Nome fantasia</label><input id="e1" value="'+EMP.f+'"><div style="height:12px"></div><label>Razão social</label><input id="e2" value="'+EMP.r+'"><div style="height:12px"></div><label>CNPJ</label><input id="e3" inputmode="numeric" placeholder="00.000.000/0000-00" value="'+EMP.c+'"><button class="pr" id="es" style="width:100%;margin-top:18px">Salvar</button>');
@@ -992,7 +995,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='2.1';
+(function(){try{MS.info='info'}catch(e){}const VER='2.2';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -1183,6 +1186,9 @@ const rel=x=>{const d=ms2(x);if(!d)return 'agora';const m=Math.round((Date.now()
 CV.length=0;REC.length=0;
 const MAP={};let curId=null,unMs=null,unCV=null,unV=null,unS=null,VND=[],SES=null,MOTOR=null,ok0=false;
 const ref=id=>db.collection('conversas').doc(id);
+const ePes=id=>!!(MOTOR&&MOTOR.pes&&MOTOR.pes[id]);
+function refPes(){const q=window._lq;if(!q)return;const L=q.docs.filter(d=>!ePes(d.id)).map(d=>carrega(d.id,d.data()));CV.length=0;L.forEach(c=>Array.prototype.push.call(CV,c));try{if($('cv3').style.display!='none')cvv()}catch(e){}}
+function tipoC(c,t){const m=db.collection('config').doc('motor');if(t=='p'){m.update({['pes.'+c.id]:c.n||'Contato'}).then(()=>{ref(c.id).update({s:'ok',r:'Pessoal',upd:TS()});toast('Marcado como pessoal · o Zac não atende')}).catch(()=>toast('Sem conexão'))}else{m.update({['pes.'+c.id]:firebase.firestore.FieldValue.delete()}).then(()=>toast('Marcado como cliente')).catch(()=>toast('Sem conexão'))}}
 function mk(id){if(MAP[id])return MAP[id];const c={id,m:[],_ld:true};let _s,_e,_r;
 const fire=o=>ref(id).update(Object.assign(o,{upd:TS()})).catch(()=>toast('Sem conexão'));
 Object.defineProperty(c,'s',{get:()=>_s,set:v=>{const o=_s;_s=v;if(c._ld||v==o)return;if(v=='me')fire({s:'h',dono:uid(),donoN:pf.n,ass:TS(),e:1});else if(v=='ok')fire({s:'ok',fim:TS()})}});
@@ -1191,7 +1197,7 @@ Object.defineProperty(c,'r',{get:()=>_r,set:v=>{_r=v;if(c._ld)return;fire({r:v})
 c.m.push=function(x){if(c._ld)return Array.prototype.push.apply(this,arguments);envia(c,x);return this.length};
 MAP[id]=c;return c}
 function carrega(id,d){const c=mk(id);c._ld=true;c.n=d.n||d.tel||'Cliente';c.l=d.l||'Sem loja';c.h=d.h||[];c.e=d.e||0;const me=d.dono&&d.dono==uid();
-c.s=d.s=='h'?(me?'me':'vo'):(d.s||'z');c.v=d.s=='h'&&!me?d.donoN:null;c.r=d.r||'';c.t=rel(d.upd);c.tel=d.tel;c.jid=d.jid;c.wa=d.wa;c._d=d;
+c.s=d.s=='h'?(me?'me':'vo'):(d.s||'z');c.v=d.s=='h'&&!me?d.donoN:null;c.r=d.r||'';c.t=rel(d.upd);c.tel=d.tel;c.tg=d.tg||[];c.jid=d.jid;c.wa=d.wa;c._d=d;
 if(!c._full){c.m.length=0;if(d.ult)Array.prototype.push.call(c.m,[d.ud||'c',d.ult])}c._ld=false;return c}
 /* enviar */
 function envia(c,x){const tp=x[0],tx=x[1];const mr=ref(c.id).collection('msgs').doc();
@@ -1213,7 +1219,7 @@ REC.push=function(x){Array.prototype.push.call(REC,x);const v=parseFloat(String(
 /* tempo real */
 let prevS={};
 window.ligaConversas=()=>{if(unCV)return;
-unCV=db.collection('conversas').orderBy('upd','desc').limit(400).onSnapshot(q=>{const L=q.docs.map(d=>carrega(d.id,d.data()));CV.length=0;L.forEach(c=>Array.prototype.push.call(CV,c));
+unCV=db.collection('conversas').orderBy('upd','desc').limit(400).onSnapshot(q=>{window._lq=q;const L=q.docs.filter(d=>!ePes(d.id)).map(d=>carrega(d.id,d.data()));CV.length=0;L.forEach(c=>Array.prototype.push.call(CV,c));
 q.docChanges().forEach(ch=>{const d=ch.doc.data(),o=prevS[ch.doc.id];if(ok0&&d.s=='w'&&o!='w'){try{tom(700)}catch(e){}avisa2('Cliente aguardando',(d.n||'')+' · '+(d.l||''))}
 else if(ok0&&ch.type=='modified'&&d.ud=='c'&&d.dono==uid()&&curId!=ch.doc.id)avisa2(d.n||'Cliente',d.ult||'');prevS[ch.doc.id]=d.s});ok0=true;
 const on=document.querySelector('.nav button.on');if(on&&on.dataset.t=='conversas'&&!document.body.classList.contains('cvo')&&!$('sheet').classList.contains('on'))cvv();
@@ -1224,7 +1230,7 @@ unV=db.collection('vendas').where('ts','>=',d0).onSnapshot(q=>{VND=q.docs.map(d=
 const mes=VND.filter(x=>x.ok&&ms2(x.ts)>=m0).reduce((s,x)=>s+(x.v||0),0);try{window._setReal&&window._setReal(mes)}catch(e){}
 const on=document.querySelector('.nav button.on');if(on&&on.dataset.t=='analise'&&!$('sheet').classList.contains('on'))anv()},()=>{});
 unS=db.collection('sessoes').doc(uid()).onSnapshot(s=>{SES=s.exists?s.data():null;meuWA=!!(SES&&SES.estado=='conectado');if($('qrv'))qrDes()},()=>{});
-db.collection('config').doc('motor').onSnapshot(s=>{MOTOR=s.exists?s.data():null;if($('qrv'))qrDes()},()=>{})};
+db.collection('config').doc('motor').onSnapshot(s=>{MOTOR=s.exists?s.data():null;refPes();if($('qrv'))qrDes()},()=>{})};
 const avisa2=(ti,bo)=>{try{if(document.hidden&&'Notification' in window&&Notification.permission=='granted')navigator.serviceWorker.ready.then(r=>r.showNotification(ti,{body:bo,icon:'icon-192.png',tag:ti+bo}))}catch(e){}};
 /* WhatsApp por perfil */
 const motorOn=()=>MOTOR&&MOTOR.hb&&(Date.now()-ms2(MOTOR.hb))<120000;
