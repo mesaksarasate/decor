@@ -998,7 +998,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='2.3';
+(function(){try{MS.info='info'}catch(e){}const VER='2.4';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -1192,8 +1192,8 @@ const ref=id=>db.collection('conversas').doc(id);
 const ePes=id=>!!(MOTOR&&((MOTOR.pes&&MOTOR.pes[id])||(MOTOR.acl&&MOTOR.acl[id])));
 function refPes(){const q=window._lq;if(!q)return;const L=q.docs.filter(d=>!ePes(d.id)).map(d=>carrega(d.id,d.data()));CV.length=0;L.forEach(c=>Array.prototype.push.call(CV,c));try{if($('cv3').style.display!='none')cvv()}catch(e){}}
 function tipoC(c,t){const m=db.collection('config').doc('motor'),D=firebase.firestore.FieldValue.delete(),n=c.n||(MOTOR&&((MOTOR.acl||{})[c.id]||(MOTOR.pes||{})[c.id]))||'Contato';
-if(t=='p'){m.update({['pes.'+c.id]:n,['acl.'+c.id]:D}).then(()=>{ref(c.id).get().then(d=>{if(d.exists)ref(c.id).update({s:'ok',r:'Pessoal',upd:TS()})});toast('Pessoal')}).catch(()=>toast('Sem conexão'))}
-else{m.update({['pes.'+c.id]:D,['acl.'+c.id]:D}).then(()=>toast('Cliente')).catch(()=>toast('Sem conexão'))}}
+if(t=='p'){m.update({['pes.'+c.id]:n,['acl.'+c.id]:D,['cli.'+c.id]:D}).then(()=>{ref(c.id).get().then(d=>{if(d.exists)ref(c.id).update({s:'ok',r:'Pessoal',upd:TS()})});toast('Pessoal')}).catch(()=>toast('Sem conexão'))}
+else{m.update({['pes.'+c.id]:D,['acl.'+c.id]:D,['cli.'+c.id]:true}).then(()=>toast('Cliente')).catch(()=>toast('Sem conexão'))}}
 function mk(id){if(MAP[id])return MAP[id];const c={id,m:[],_ld:true};let _s,_e,_r;
 const fire=o=>ref(id).update(Object.assign(o,{upd:TS()})).catch(()=>toast('Sem conexão'));
 Object.defineProperty(c,'s',{get:()=>_s,set:v=>{const o=_s;_s=v;if(c._ld||v==o)return;if(v=='me')fire({s:'h',dono:uid(),donoN:pf.n,ass:TS(),e:1});else if(v=='ok')fire({s:'ok',fim:TS()})}});
