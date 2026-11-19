@@ -382,6 +382,7 @@ body.dk .mpop,body.dk #slp,body.dk #stp{box-shadow:0 10px 30px -10px rgba(0,0,0,
 
 .card:has(.sw){overflow:hidden}.swf{border-radius:0!important}
 #mode{display:none!important}.pop .pi{cursor:pointer}#sb{display:none!important}</style>
+<style id="v47">#ms .bl.z{position:relative}#ms .bl.z .ed47{position:absolute;top:4px;right:4px;width:26px;height:26px;border:0;border-radius:50%;background:var(--bg);color:var(--mu);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .15s;padding:0}#ms .bl.z .ed47 .ms{font-size:15px}#ms .bl.z:hover .ed47,#ms .bl.z .ed47:focus{opacity:1}@media (hover:none){#ms .bl.z .ed47{opacity:.55}}.ed47p{margin:6px 0 10px auto;max-width:420px;padding:12px;display:flex;flex-direction:column;gap:8px}.ed47p textarea{width:100%;min-height:70px;border-radius:12px;padding:10px;font:inherit;resize:vertical}.ed47b{display:flex;justify-content:flex-end;gap:8px}</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -1010,7 +1011,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='3.3.4';
+(function(){try{MS.info='info'}catch(e){}const VER='3.3.5';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -1226,12 +1227,21 @@ if(tp=='lv'){if(/atual/i.test(tx)&&navigator.geolocation){navigator.geolocation.
 else go({tipo:'txt',t:'Endereço: '+tx+'\nhttps://maps.google.com/?q='+encodeURIComponent(tx+', Imperatriz - MA')},tx);return}
 go({tipo:'txt',t:tx},tx)}
 /* mensagens da conversa aberta */
-const bal=m=>(m[3]&&m[3].md&&window._mdB)?window._mdB(m):m[0]=='s'?'<div class="sy">'+esc(m[1])+'</div>':m[0]=='lc'?mapa(esc(m[1]),false):m[0]=='lv'?mapa(esc(m[1]),true):'<div class="bl '+m[0]+'">'+(m[0]=='z'?'<small>Zac</small>':'')+esc(m[1]).replace(/\n/g,'<br>')+(m[2]=='pend'?' <span style="opacity:.5">·</span>':m[2]=='erro'?' <span class="ms" style="font-size:14px;width:14px;height:14px;vertical-align:-2px;color:var(--er)">error</span>':'')+'</div>';
-function desenha(c){const ms=$('ms');if(!ms||curId!=c.id)return;const fim=ms.scrollHeight-ms.scrollTop-ms.clientHeight<80;ms.innerHTML=c.m.map(bal).join('');if(fim||!c._v1){ms.scrollTop=ms.scrollHeight;c._v1=1}if($('sic'))$('sic').innerHTML=stIc(c)}
+const bal=(m,i)=>(m[3]&&m[3].md&&window._mdB)?window._mdB(m):m[0]=='s'?'<div class="sy">'+esc(m[1])+'</div>':m[0]=='lc'?mapa(esc(m[1]),false):m[0]=='lv'?mapa(esc(m[1]),true):'<div class="bl '+m[0]+'"'+(m[0]=='z'&&i!=null?' data-zi="'+i+'"':'')+'>'+(m[0]=='z'?'<small>Zac</small>':'')+(m[0]=='z'&&i!=null?'<button class="ed47" type="button" aria-label="Ensinar o Zac" title="Como prefere que o Zac responda"><span class="ms">edit</span></button>':'')+esc(m[1]).replace(/\n/g,'<br>')+(m[2]=='pend'?' <span style="opacity:.5">·</span>':m[2]=='erro'?' <span class="ms" style="font-size:14px;width:14px;height:14px;vertical-align:-2px;color:var(--er)">error</span>':'')+'</div>';
+function desenha(c){const ms=$('ms');if(!ms||curId!=c.id)return;const fim=ms.scrollHeight-ms.scrollTop-ms.clientHeight<80;ms.innerHTML=c.m.map((m,i)=>bal(m,i)).join('');if(fim||!c._v1){ms.scrollTop=ms.scrollHeight;c._v1=1}if($('sic'))$('sic').innerHTML=stIc(c)}
 const oab=abre;abre=function(i){const c=CV[i];if(!c)return;curId=c.id;c._v1=0;if(unMs)unMs();const r=oab.apply(this,arguments);
 unMs=ref(c.id).collection('msgs').orderBy('ts').limitToLast(300).onSnapshot(q=>{c._ld=true;c.m.length=0;q.docs.forEach(d=>{const x=d.data();Array.prototype.push.call(c.m,[x.d,x.t,x.st,x.md?{md:x.md,url:x.url||'',nome:x.nome||'',grande:!!x.grande,falhou:!!x.falhou}:null])});c._full=true;c._ld=false;desenha(c)},()=>{});
 if(c._d&&c._d.nl)ref(c.id).update({nl:0}).catch(()=>{});return r};
 const ofe=fecha;fecha=function(){if(unMs){unMs();unMs=null}curId=null;return ofe.apply(this,arguments)};
+/* lápis: como prefiro que o Zac responda */
+document.addEventListener('click',e=>{const b=e.target.closest('#ms .ed47');if(!b)return;e.stopPropagation();const bl=b.closest('[data-zi]'),c=MAP[curId];if(!bl||!c)return;const i=+bl.dataset.zi;
+let k=i-1;while(k>=0&&c.m[k][0]!='c')k--;const Q=[];while(k>=0&&c.m[k][0]=='c'){Q.unshift(c.m[k][1]);k--}const q=Q.join(' ').trim();
+const o=$('ed47p');if(o)o.remove();const p=document.createElement('div');p.id='ed47p';p.className='card ed47p';
+p.innerHTML='<div class="sb">'+(q?'Cliente: '+esc(q.slice(0,160)):'Mensagem do Zac')+'</div><textarea id="ed47t" rows="3"></textarea><div class="ed47b"><button class="sc" id="ed47x">Cancelar</button><button class="sm" id="ed47s">Salvar</button></div>';
+bl.after(p);const t=$('ed47t');t.value=c.m[i][1]||'';t.focus();$('ed47x').onclick=()=>p.remove();
+$('ed47s').onclick=()=>{const a=t.value.trim();if(!a)return;const gest=adm||/Gerente|Supervisor/i.test(String(pf.c||''));const pq=q||c.m[i][1];
+if(gest){const j=KB.findIndex(x=>x&&String(x.q).toLowerCase()==pq.toLowerCase());if(j>=0)KB[j].a=a;else KB.push({q:pq,a});const l=LAC.findIndex(x=>String(x).toLowerCase()==pq.toLowerCase());if(l>=0)LAC.splice(l,1);try{window.salvarLoja()}catch(x){}toast('Pronto · o Zac vai responder assim')}
+else{REV.push({q:pq,a,por:pf.n||''});toast('Enviado para revisão')}p.remove()}},true);
 /* vendas */
 REC.push=function(x){Array.prototype.push.call(REC,x);const nm=t=>parseFloat(String(t||'').replace(/[^\d,]/g,'').replace(',','.'))||0;const vb=nm(x.v),vd=nm(x.vd),v=vd&&vd<vb?vd:vb;db.collection('vendas').add({conv:curId,c:x.c,l:x.l,v,vb,fp:x.fp,re:x.re,nf:x.nf,cat:x.cat,ok:true,por:uid(),porN:pf.n,ts:TS()});return REC.length};
 /* tempo real */
