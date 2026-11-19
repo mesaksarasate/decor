@@ -1041,7 +1041,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='3.3.9';
+(function(){try{MS.info='info'}catch(e){}const VER='4.0';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -2632,6 +2632,143 @@ function ficha(){
 window._r46=()=>{rest=false;rt0=0;restaura()};
 let q=0;new MutationObserver(()=>{if(q)return;q=requestAnimationFrame(()=>{q=0;fila();sys();ficha();restaura()})}).observe(document.body,{childList:true,subtree:true});
 })();
+</script>
+<style id="v50">
+/* ===== 4.0 · novo padrão visual (base única de variáveis) ===== */
+:root,body{
+ --acao:#063368;--acao-t:#fff;--app:#F5F6F8;--sf:#FFFFFF;--sf2:#F0F2F5;--ln:#E4E7EC;--fr:#98A2B3;
+ --sel:#EAF0F8;--urg:#D92D20;--urg-b:#FEF3F2;--okc:#12805C;--ok-b:#ECFDF3;--wac:#B54708;--wa-b:#FFFAEB;--zac:#EEF4FF;--zac-tx:#063368;--nota:#FFF8E6;
+ --ac:var(--acao);--acs:var(--sel);--bg:var(--sf);--pn:var(--app);--in:var(--sf2);--bt:var(--sf2);--bd:var(--ln);--hl:var(--ln);--tx:#14171C;--mu:#667085;
+ --ok:var(--okc);--er:var(--urg);--wa:var(--wac);--sh:0 1px 2px rgba(16,24,40,.05);
+}
+body.dk{
+ --acao:#8FB4EE;--acao-t:#0B1526;--app:#0E1014;--sf:#15181D;--sf2:#1C2027;--ln:#262B33;--fr:#6B7380;
+ --sel:#1B2534;--urg:#F97066;--urg-b:#2A1715;--okc:#47CD89;--ok-b:#0F2219;--wac:#FDB022;--wa-b:#2A2010;--zac:#18233A;--zac-tx:#C7D9F7;--nota:#2B2415;
+ --tx:#E9EBEF;--mu:#9AA3B2;--sh:none;
+}
+html body{font-family:Inter,system-ui,sans-serif!important;-webkit-font-smoothing:antialiased;background:var(--app)!important;color:var(--tx)}
+html body #home,html body #home .app,html body .ct{background:var(--app)!important}
+/* ---- menu lateral ---- */
+html body.lg #home .rail{background:var(--sf)!important;border-right:1px solid var(--ln)!important;box-shadow:none!important}
+html body.lg .rail>button[data-t]{height:38px!important;border-radius:8px!important;color:var(--mu)!important;font-weight:500!important;font-size:14px!important}
+html body.lg .rail>button[data-t]:hover{background:var(--sf2)!important;color:var(--tx)!important}
+html body.lg .rail>button[data-t].on{background:var(--sel)!important;color:var(--acao)!important}
+html body.dk.lg .rail>button[data-t].on{color:var(--tx)!important}
+html body .rail .rc40{background:var(--sf2)!important;color:var(--mu)!important;font-size:12px!important}
+html body .rail>button[data-t="conversas"] .rc40:not(:empty){background:var(--urg)!important;color:#fff!important}
+html body .rail .rs43 button{border-radius:6px!important;font-size:13px!important}
+html body .rail .rs43 button.on{background:var(--sel)!important;color:var(--acao)!important}
+/* ---- topo ---- */
+html body header.hd,html body header.hd.cp{background:var(--sf)!important;border-bottom:1px solid var(--ln)!important;box-shadow:none!important;backdrop-filter:none!important}
+html body header.hd .hb{border-radius:8px!important;color:var(--mu)!important}
+html body header.hd .hb:hover{background:var(--sf2)!important;color:var(--tx)!important}
+html body header.hd .bdg{background:var(--urg)!important;color:#fff!important;border:2px solid var(--sf)!important}
+html body #hbs,html body .hsrch{border-radius:8px!important}
+/* ---- cartões, botões, campos ---- */
+html body .card{background:var(--sf)!important;border:1px solid var(--ln)!important;border-radius:16px!important;box-shadow:var(--sh)!important}
+html body .pr,html body button.pr{background:var(--acao)!important;color:var(--acao-t)!important;border-radius:8px!important;box-shadow:none!important;font-weight:500!important}
+html body .pr:hover{filter:brightness(1.08)}
+html body .sc{border-radius:8px!important;box-shadow:none!important}
+html body .sm{border-radius:8px!important;box-shadow:none!important}
+html body input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]),html body textarea,html body select,html body .sel{border:1px solid var(--ln)!important;border-radius:8px!important;background:var(--sf)!important;color:var(--tx)!important;box-shadow:none!important}
+html body input:focus,html body textarea:focus,html body select:focus{border-color:var(--acao)!important;outline:0;box-shadow:0 0 0 3px color-mix(in srgb,var(--acao) 15%,transparent)!important}
+html body .chip{border-radius:6px!important;background:var(--sf2)!important;color:var(--mu)!important;border:0!important;box-shadow:none!important;font-weight:500}
+html body .chip.on{background:var(--sel)!important;color:var(--acao)!important}
+html body .tg{background:var(--ln)!important}html body .tg.on{background:var(--acao)!important}
+html body .seg:not(#cv3 .seg){background:var(--sf2)!important;border-radius:8px!important;padding:3px!important}
+html body .seg:not(#cv3 .seg) button{border-radius:6px!important;color:var(--mu)!important;height:30px!important;font-size:13px!important}
+html body .seg:not(#cv3 .seg) button.on{background:var(--sf)!important;color:var(--tx)!important;box-shadow:var(--sh)!important}
+html body .sec{color:var(--mu)!important;font-size:13px!important;font-weight:600!important}
+html body .lr{border-color:var(--ln)!important}
+html body .card>.lr:hover,html body .card>.rowx:hover{background:var(--sf2)}
+/* ---- janelas laterais ---- */
+html body .sp2{background:var(--sf)!important}
+html body:not(.cvo) #sheet.on{background:rgba(16,24,40,.32)!important}
+/* ---- Conversas: abas ---- */
+html body #cv3 .seg{background:var(--sf)!important;box-shadow:inset 0 -1px 0 var(--ln)!important;gap:2px!important}
+html body #cv3 .seg button{height:30px!important;padding:0 10px!important;border-radius:8px!important;font-size:13px!important;font-weight:500!important;color:var(--mu)!important;background:transparent!important}
+html body #cv3 .seg button:hover{background:var(--sf2)!important}
+html body #cv3 .seg button.on{background:var(--sel)!important;color:var(--acao)!important}
+html body.dk #cv3 .seg button.on{color:var(--tx)!important}
+html body #cv3 .seg button b{background:var(--sf2)!important;color:var(--mu)!important;border-radius:9px!important}
+html body #cv3 .seg button.on b{background:var(--acao)!important;color:var(--acao-t)!important}
+/* ---- Conversas: fila ---- */
+html body #cv3,html body.lg.t43 #cv3#cv3{background:var(--sf)!important;box-shadow:inset -1px 0 0 var(--ln)!important}
+html body #cv3 .card{border:0!important;box-shadow:none!important;border-radius:0!important;background:transparent!important}
+html body #cv3 .card>.lr.cc{padding:12px 40px 12px 14px!important;box-shadow:inset 0 -1px 0 var(--ln)!important;background:transparent!important}
+html body #cv3 .card>.lr.cc:hover{background:var(--sf2)!important}
+html body #cv3 .card>.lr.cc.sel{background:var(--sel)!important}
+html body #cv3 .card>.lr.cc.sel:before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--acao)}
+html body #cv3 .lr .nm{font-weight:600!important;font-size:14px!important}
+html body #cv3 .lr .sb{color:var(--mu)!important;font-size:13px!important}
+html body #cv3 .lr .cmeta .etq{background:var(--sf2)!important;color:var(--mu)!important;border-radius:6px!important}
+html body #cv3 .lr .cmeta .urg{background:var(--urg-b)!important;color:var(--urg)!important;border-radius:6px!important}
+html body #cv3 .lr .nl42{background:var(--acao)!important;color:var(--acao-t)!important}
+html body #cv3 .lr .ok46{color:var(--okc)!important}
+/* ---- Conversas: área da conversa ---- */
+html body.lg.cvo #sheet#sheet .sp2{background:var(--app)!important;padding:0!important}
+html body.lg.cvo #sheet .sp2 .cvh{background:var(--sf)!important;border-bottom:1px solid var(--ln)!important;padding:10px 16px!important;margin:0!important;min-height:60px;box-sizing:border-box}
+html body.lg.cvo #sheet .sp2 #ms{padding:16px 24px!important}
+html body.lg.cvo #sheet .sp2 #zbw{padding:0 24px}
+html body.lg.cvo #sheet .sp2 #cb{background:var(--sf)!important;border-top:1px solid var(--ln)!important;padding:10px 16px 14px!important;margin:0!important}
+html body.lg.cvo #sheet .sp2 #etw{padding:0 24px}
+html body #ms .bl{border-radius:12px!important;padding:8px 12px!important;font-size:14px!important;line-height:1.45!important;box-shadow:none!important}
+html body #ms .bl.c:not(.emo){background:var(--sf)!important;border:1px solid var(--ln)!important;color:var(--tx)!important;border-bottom-left-radius:4px!important}
+html body #ms .bl.z{background:var(--zac)!important;color:var(--zac-tx)!important;border-bottom-right-radius:4px!important}
+html body #ms .bl.v{background:var(--acao)!important;color:var(--acao-t)!important;border-bottom-right-radius:4px!important}
+html body #ms .bl.v small,html body #ms .bl.v .sb{color:inherit!important;opacity:.75}
+html body #ms .bl.n{background:var(--nota)!important;color:var(--tx)!important;box-shadow:none!important;border:1px dashed var(--wac)!important}
+html body #ms .bl.z>small{color:var(--mu)!important}
+html body #ms .sy{color:var(--fr)!important;font-size:12px!important;background:transparent!important}
+html body .zbx{background:var(--sf)!important;border:1px solid var(--ln)!important;border-radius:12px!important}
+html body .zbx .zbh .ms{color:var(--acao)!important}
+html body .zbl{color:var(--tx)!important;font-size:13px!important}
+/* campo de mensagem */
+html body #cb #tx{height:44px!important;border-radius:12px!important}
+html body #cb #snd{background:var(--acao)!important;color:var(--acao-t)!important;border-radius:8px!important}
+html body #cb .tb42 button{border-radius:6px!important;font-size:12.5px!important;color:var(--mu)!important}
+html body #cb .tb42 button.on{background:var(--sf2)!important;color:var(--tx)!important}
+html body #cb.n42 #tx{background:var(--nota)!important;border-color:var(--wac)!important}
+html body #cb #qr2 .chip{border-radius:13px!important;background:transparent!important;border:1px solid var(--ln)!important}
+/* botões do cabeçalho da conversa */
+html body .cvh .cvc{background:var(--acao)!important;color:var(--acao-t)!important;border-radius:8px!important}
+html body .cvh .cva,html body .cvh .ca42{border-radius:8px!important;color:var(--mu)!important}
+html body .cvh .cva:hover,html body .cvh .ca42:hover{background:var(--sf2)!important;color:var(--tx)!important}
+html body #sheet #cb button#as,html body #sheet #cb #as.pr{background:var(--acao)!important;color:var(--acao-t)!important;border:0!important;border-radius:8px!important;box-shadow:none!important}
+html body #login .vis{position:relative!important;overflow:hidden}
+/* ficha do cliente */
+html body.lg.cvo aside.cvf{background:var(--sf)!important;box-shadow:inset 1px 0 0 var(--ln)!important}
+html body aside.cvf details summary{font-size:12px!important;font-weight:600!important;color:var(--fr)!important;text-transform:uppercase;letter-spacing:.04em}
+html body aside.cvf .kv span{color:var(--mu)!important}
+/* ---- Início ---- */
+html body #car.c30{border:1px solid var(--ln)!important;border-radius:16px!important;box-shadow:var(--sh)!important}
+html body .f30{border-radius:16px!important}
+html body .f30r{border-color:var(--ln)!important}
+/* ---- Análise ---- */
+html body .kp .kv{font-weight:600!important;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+html body .kd.up{color:var(--okc)!important}html body .kd.dn{color:var(--urg)!important}
+html body .mtb i,html body .bt2 i{background:var(--acao)!important}
+/* ---- entrada ---- */
+html body #login,html body #login .wrap{background:var(--sf)!important}
+html body #login #cena,html body #login #shd,html body #login #cv{display:none!important}
+html body #login .box{align-items:stretch!important;text-align:left}
+html body #login .box .lg41{align-items:flex-start!important;justify-content:flex-start!important}
+html body #login .box .t50{font-size:26px;font-weight:600;letter-spacing:-.02em;margin:18px 0 0}
+html body #login .box .s50{color:var(--mu);margin:-4px 0 6px}
+html body #login .vis{background:#F3EFE8!important}
+html body.dk #login .vis{background:#14161A!important}
+html body #login .z50{position:absolute;left:40px;right:40px;bottom:36px;z-index:3;background:color-mix(in srgb,var(--sf) 88%,transparent);backdrop-filter:blur(10px);border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px rgba(16,24,40,.12);text-align:left}
+html body #login .z50 b{display:block;font-weight:600;color:var(--tx)}html body #login .z50 small{color:var(--mu);font-size:13px}
+html body #login .z50 .ms{font-size:28px;color:var(--acao)}
+html body #login .vis>div.z50:not(#z1):not(#z2){display:flex!important;position:absolute!important;left:40px!important;right:40px!important;bottom:36px!important;top:auto!important;margin:0!important;transform:none!important;width:auto!important}
+@media (max-width:899px){html body #login .vis>div.z50:not(#z1):not(#z2){display:none!important}}
+
+</style>
+<script>
+/* 4.0 · entrada no novo padrão */
+(function(){function poe(){const b=document.querySelector('#login .box');if(b&&!b.querySelector('.t50')){const lg=b.querySelector('.lg41');const h=document.createElement('div');h.innerHTML='<div class="t50">Entrar</div><div class="s50">Acesse o atendimento da sua loja.</div>';if(lg)lg.after(...h.children);else b.prepend(...h.children)}
+const v=document.querySelector('#login .vis');if(v&&!v.querySelector('.z50')){const z=document.createElement('div');z.className='z50';z.innerHTML='<span class="ms">bolt</span><div><b>O Zac já está atendendo</b><small>Os clientes que chegarem agora são recebidos na hora.</small></div>';v.appendChild(z)}}
+if(document.readyState!='loading')poe();else addEventListener('DOMContentLoaded',poe);setTimeout(poe,600);setTimeout(poe,2000)})();
 </script>
 </body>
 </html>
