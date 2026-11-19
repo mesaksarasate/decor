@@ -386,6 +386,32 @@ body.dk .mpop,body.dk #slp,body.dk #stp{box-shadow:0 10px 30px -10px rgba(0,0,0,
 #mode{display:none!important}.pop .pi{cursor:pointer}#sb{display:none!important}</style>
 <style id="v47">#ms .bl.z{position:relative}#ms .bl.z .ed47{position:absolute;top:4px;right:4px;width:26px;height:26px;border:0;border-radius:50%;background:var(--bg);color:var(--mu);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .15s;padding:0}#ms .bl.z .ed47 .ms{font-size:15px}#ms .bl.z:hover .ed47,#ms .bl.z .ed47:focus{opacity:1}@media (hover:none){#ms .bl.z .ed47{opacity:.55}}.ed47p{margin:6px 0 10px auto;max-width:420px;padding:12px;display:flex;flex-direction:column;gap:8px}.ed47p textarea{width:100%;min-height:70px;border-radius:12px;padding:10px;font:inherit;resize:vertical}.ed47b{display:flex;justify-content:flex-end;gap:8px}</style>
 <style id="v48">#cv3 .lr .ok46.n46,html body #cv3 .lr .ok46.n46{color:var(--mu)!important}</style>
+<style id="v49">
+/* estrutura fixa da tela de Conversas no PC: menu | fila | conversa, sem medir a tela (funciona com qualquer zoom e tamanho de texto) */
+html body.lg header.hd.hd>div:first-child{max-width:none!important;margin:0!important;width:100%}
+html body.lg{--rw:240px;--hdh:56px;--tbh:56px;--lw:340px}
+html body.lg.rc45{--rw:72px}
+@media (min-width:1600px){html body.lg{--lw:360px}}
+html body.lg.t43 header.hd.hd{height:var(--hdh)!important;min-height:0!important;padding-top:0!important;padding-bottom:0!important;display:flex!important;flex-direction:column;justify-content:center;overflow:hidden;box-sizing:border-box}
+html body.lg.t43 header.hd.hd>div:first-child{width:100%;max-width:none!important;margin:0!important}
+html body.lg.t43 header.hd.hd #hgr{display:none!important}
+html body.lg.t43 #cv3#cv3 .seg{position:fixed!important;top:var(--hdh)!important;left:var(--rw)!important;right:0!important;height:var(--tbh)!important;margin:0!important;padding:0 20px!important;box-sizing:border-box;z-index:30}
+html body.lg.t43 #cv3#cv3{position:fixed!important;top:calc(var(--hdh) + var(--tbh))!important;left:var(--rw)!important;bottom:0!important;width:var(--lw)!important;max-width:var(--lw)!important;min-height:0!important;padding:0!important;margin:0!important;overflow-y:auto!important;overflow-x:hidden!important;box-sizing:border-box;scrollbar-width:thin}
+html body.lg.t43 #cv3#cv3 .tt42{display:none!important}
+html body.lg.t43.cvo #sheet#sheet .sp2{position:fixed!important;top:calc(var(--hdh) + var(--tbh))!important;left:calc(var(--rw) + var(--lw))!important;right:0!important;bottom:0!important;width:auto!important;max-width:none!important;margin:0!important;box-sizing:border-box}
+html body.lg.t43 #cv3#cv3 .card>.lr.cc{margin:0!important;border-radius:0!important}
+html body.lg.t43 #cv3#cv3 .emp{margin-top:40px}
+/* ficha do Zac compacta e com respiro até as mensagens */
+#zbw{flex-shrink:0}
+#zbw .zbx{margin:10px 0 8px!important;padding:10px 14px!important}
+body.lg #zbw .zbx:not(.fz){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
+body.lg #zbw .zbx .zbh{grid-column:1/-1}
+body.lg #zbw .zbl.zdc{grid-column:1/-1}
+#ms{scroll-padding-top:12px}
+/* celular: o topo não pode cortar a foto do perfil */
+@media (max-width:899px){header.hd>div:first-child{max-width:100%!important;min-width:0;gap:6px}header.hd>div:first-child>div:first-child{min-width:0;overflow:hidden}header.hd>div:first-child>div:last-child{gap:2px!important;flex-shrink:0}}
+@media (max-width:440px){header.hd .cmp{display:none!important}header.hd .hb{width:36px!important;height:36px!important}}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -1015,7 +1041,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='3.3.7';
+(function(){try{MS.info='info'}catch(e){}const VER='3.3.8';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -1544,7 +1570,7 @@ LAC.length=0;REV.length=0;KB.length=0;fecha();toast('Dados apagados · recomeço
 /* ===== Ajustes: novas linhas ===== */
 const oJ=ajv;ajv=function(){const r=oJ.apply(this,arguments);const v=$('av2');if(!v||$('aj27'))return r;const w=document.createElement('div');w.id='aj27';
 w.innerHTML=sec('Preferências')+'<div class="card" style="padding:14px 18px"><label>Tamanho do texto</label><div class="chips" id="tzc"></div></div>'+(adm?sec('Dados')+'<div class="card">'+rowA('cont','Importar contatos','','im')+'</div>':'');
-const sig=v.querySelector('.sig');if(sig)sig.parentNode.insertBefore(w,sig);else v.appendChild(w);
+const so=v.querySelector('.aj[data-k=so]'),sig=v.querySelector('.sig');const ant=so?(so.closest('.card')&&so.closest('.card').parentNode===v?so.closest('.card'):so):sig;if(ant)ant.parentNode.insertBefore(w,ant);else v.appendChild(w);
 let cur='Normal';try{cur=localStorage.getItem('dz')||'Normal'}catch(e){}chips('tzc',Object.keys(TZ),cur,n=>{try{localStorage.setItem('dz',n)}catch(e){}apz(n)});
 window._apaga=apaga;const zb=$('zap');if(zb)zb.onclick=apaga;const im=w.querySelector('[data-k=im]');if(im)im.onclick=importa;const ap2=w.querySelector('[data-k=ap]');if(ap2)ap2.onclick=apaga;return r};
 })();
@@ -2468,17 +2494,9 @@ html body.lg.t43 .ct:not(#cv3){display:none}
 (function(){
 const gest=()=>{try{return (typeof adm!='undefined'&&adm)||/Gerente|Supervisor/i.test(String((typeof pf!='undefined'&&pf.c)||''))}catch(e){return true}};
 function ajusta(){
-  if(!document.body.classList.contains('lg'))return;
-  const rl=document.querySelector('.rail');if(rl)document.body.style.setProperty('--rl43',rl.getBoundingClientRect().right+'px');
-  const v=document.getElementById('cv3');if(v&&v.offsetParent)document.body.style.setProperty('--cvl43',v.getBoundingClientRect().right+'px');
   const eq=document.querySelector('#cv3 .seg button[data-s="eq"]');if(eq)eq.style.display=gest()?'':'none';
-  if(document.body.classList.contains('t43')){
-    const h=document.querySelector('header.hd'),sg=document.querySelector('#cv3 .seg'),sp=document.querySelector('#sheet .sp2'),v2=document.getElementById('cv3');
-    const hb=h?Math.round(h.getBoundingClientRect().bottom):57,rr=rl?Math.round(rl.getBoundingClientRect().right):240;
-    if(sg){sg.style.setProperty('top',hb+'px','important');sg.style.setProperty('left',rr+'px','important')}
-    if(v2){v2.style.setProperty('min-height','calc(100vh - '+hb+'px)','important')}
-    if(sp&&document.body.classList.contains('cvo')&&v2){sp.style.setProperty('top',(hb+64)+'px','important');sp.style.setProperty('left',Math.round(v2.getBoundingClientRect().right)+'px','important');sp.style.setProperty('right','0','important');sp.style.setProperty('bottom','0','important');sp.style.setProperty('width','auto','important');sp.style.setProperty('max-width','none','important');sp.style.setProperty('margin','0','important')}
-  }else{const sp=document.querySelector('#sheet .sp2');if(sp)['top','left','right','bottom','width','max-width','margin'].forEach(k=>sp.style.removeProperty(k))}
+  /* posições agora vêm só do CSS (sem medir a tela): limpa o que a versão anterior gravava */
+  ['#cv3 .seg','#sheet .sp2','#cv3'].forEach(q=>{const e=document.querySelector(q);if(e&&e.style.length)['top','left','right','bottom','width','max-width','margin','min-height'].forEach(k=>e.style.removeProperty(k))});
 }
 new MutationObserver(ajusta).observe(document.body,{childList:true,subtree:true});addEventListener('resize',ajusta);setInterval(ajusta,600);ajusta();
 })();
@@ -2588,7 +2606,7 @@ function fila(){
   v.querySelectorAll('.lr.cc[data-i]').forEach(r=>{const c=L()[+r.dataset.i];if(!c)return;
     const rs=r.querySelector('.rs42');if(rs&&!(typeof fc!='undefined'&&fc=='eq'))rs.style.display='none';else if(rs)rs.style.display='';
     r.classList.toggle('u46',!!(c._d&&c._d.urg));
-    if(c.s=='ok'){r.classList.add('k46');const b=r.children[1];const vd=/^Venda/.test(String(c.r||''));const t=String(c.r||'Concluída').replace(/^Atendimento · /,'');let o=b&&b.querySelector('.ok46');if(b&&(!o||o.dataset.t!==t)){if(o)o.remove();o=document.createElement('div');o.className='ok46'+(vd?'':' n46');o.dataset.t=t;if(vd)o.innerHTML='<span class="ms">check_circle</span>';o.appendChild(document.createTextNode(t));b.appendChild(o)}}else{const o=r.querySelector('.ok46');if(o)o.remove();r.classList.remove('k46')}
+    if(c.s=='ok'){r.classList.add('k46');const b=r.children[1];const vd=/^Venda/.test(String(c.r||''));const t=String(c.r||'Concluída').replace(/^Atendimento · /,'').replace(/ · pós-venda em \d+ dias?$/,'');let o=b&&b.querySelector('.ok46');if(b&&(!o||o.dataset.t!==t)){if(o)o.remove();o=document.createElement('div');o.className='ok46'+(vd?'':' n46');o.dataset.t=t;if(vd)o.innerHTML='<span class="ms">check_circle</span>';o.appendChild(document.createTextNode(t));b.appendChild(o)}}else{const o=r.querySelector('.ok46');if(o)o.remove();r.classList.remove('k46')}
   });
 }
 /* mensagens do sistema óbvias */
