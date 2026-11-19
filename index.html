@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta name="theme-color" content="#F5F6F8">
+<head>
+<script>try{if(localStorage.getItem('lg48')=='1')document.documentElement.classList.add('rl')}catch(e){}</script>
+<style>html.rl #login,html.rl #spl30{display:none!important}</style><meta name="theme-color" content="#F5F6F8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Decor Atendimento</title>
@@ -1013,7 +1015,7 @@ if(RM){make();sk[0].dr=1;sk[0].hold=1e12;setTimeout(()=>{requestAnimationFrame(t
 else{setTimeout(()=>{last=performance.now();make();raf=requestAnimationFrame(frame)},900);const c=$('cena');c&&c.addEventListener('click',()=>{if(sk.length<3)make(true)})}
 })();
 
-(function(){try{MS.info='info'}catch(e){}const VER='3.3.6';
+(function(){try{MS.info='info'}catch(e){}const VER='3.3.7';
 const oj=ajv;ajv=function(){oj.apply(this,arguments);const r=document.querySelector('.aj[data-k="so"]');if(!r)return;
 const w=r.cloneNode(true);r.replaceWith(w);if(!w.parentNode.classList.contains('card')){const c=document.createElement('div');c.className='card';w.before(c);c.appendChild(w)}
 w.onclick=()=>sheet('<div class="sob"><span class="brand">Decor</span><span class="cmp" style="font-size:15px">Atendimento</span><div class="sb">versão '+VER+'</div><div class="lic">Licenciado para <b>Auto Tintas Decor</b><br>© 2026 Mesak Sarasate<br>Todos os direitos reservados</div><div class="sig sig1" style="margin-top:22px"><small>por</small><span>Mesak Sarasate</span></div></div>')}})();
@@ -1725,7 +1727,7 @@ function abertura(){try{if($('spl30'))return;document.body.classList.add('spl30'
 const d=document.createElement('div');d.id='spl30';d.setAttribute('aria-hidden','true');d.innerHTML='<svg viewBox="0 0 210 196" width="120" height="112"><path d="M105 8 L202 186 Q205 192 198 192 L12 192 Q5 192 8 186 Z" fill="#fff"/><rect x="70" y="92" width="70" height="20" rx="2" fill="#EC1D25"/><rect x="95" y="92" width="20" height="86" rx="2" fill="#EC1D25"/></svg>';document.body.appendChild(d);
 document.querySelectorAll('#login .an').forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});if(window._g3&&window._g3.cai)window._g3.cai();
 setTimeout(()=>{document.body.classList.remove('spl30')},1500);setTimeout(()=>d.remove(),1800)}catch(e){}}
-const lgv=$('login');if(lgv){if(lgv.classList.contains('on'))abertura();let on0=lgv.classList.contains('on');new MutationObserver(()=>{const on=lgv.classList.contains('on');if(on&&!on0)abertura();on0=on}).observe(lgv,{attributes:true,attributeFilter:['class']})}
+const lgv=$('login');if(lgv){if(lgv.classList.contains('on')&&!document.documentElement.classList.contains('rl'))abertura();let on0=lgv.classList.contains('on');new MutationObserver(()=>{const on=lgv.classList.contains('on');if(on&&!on0)abertura();on0=on}).observe(lgv,{attributes:true,attributeFilter:['class']})}
 /* gestos do triângulo: não ao erro, festa ao entrar */
 const er=$('er');if(er)new MutationObserver(()=>{if(er.textContent.trim()&&window._g3)window._g3.nao()}).observe(er,{childList:true,characterData:true,subtree:true});
 const bt=$('en');if(bt)bt.addEventListener('click',()=>{const e=$('em'),s=$('sn');if(e&&s&&e.value.trim()&&s.value&&window._g3)window._g3.festa()},true);
@@ -2572,11 +2574,14 @@ let syT=0;const guardaY=()=>{if(!rest)return;clearTimeout(syT);syT=setTimeout(()
 document.addEventListener('input',e=>{if(e.target.id!='tx')return;const c=window._cv;if(!c)return;const d=ld().d||{};if(e.target.value)d[c.id]=e.target.value.slice(0,2000);else delete d[c.id];sv({d})});
 document.addEventListener('click',e=>{if(e.target.closest('#cv3 .seg button'))setTimeout(()=>{if(rest)sv({f:typeof fc!='undefined'?fc:''})},0)},true);
 function restaura(){
-  if(rest)return;const h=document.getElementById('home');if(!h||getComputedStyle(h).display=='none'||!L().length){rt0=0;return}if(!rt0){rt0=Date.now();setTimeout(restaura,1300);return}if(Date.now()-rt0<1200)return;rest=true;
+  if(rest)return;const h=document.getElementById('home');if(!h||getComputedStyle(h).display=='none'||!L().length){rt0=0;return}if(!rt0){rt0=Date.now();setTimeout(restaura,250);return}if(Date.now()-rt0<200)return;rest=true;
   const s=ld();try{if(s.t&&s.t!='inicio')tab(s.t)}catch(e){}
   if(s.y||s.wy)setTimeout(()=>{const st=document.getElementById('stage');if(st&&s.y)st.scrollTop=s.y;if(s.wy)window.scrollTo(0,s.wy)},450);
   if(s.t=='conversas'){try{if(s.f){fc=s.f;cvv()}const i=L().findIndex(c=>c.id==s.c);if(i>=0)setTimeout(()=>{try{abre(i)}catch(e){}},80)}catch(e){}}
 }
+try{const oe=entraHome;entraHome=function(){const r=oe.apply(this,arguments);const s=ld();if(s.t&&s.t!='inicio'){try{tab(s.t)}catch(e){}if(s.t=='conversas'&&s.f){try{fc=s.f;cvv()}catch(e){}}}return r}}catch(e){}
+try{firebase.auth().onAuthStateChanged(u=>{try{if(u)localStorage.setItem('lg48','1');else{localStorage.removeItem('lg48');document.documentElement.classList.remove('rl')}}catch(e){}})}catch(e){}
+setTimeout(()=>{const h=document.getElementById('home'),st=document.getElementById('setup');if(!(h&&h.classList.contains('on'))&&!(st&&st.classList.contains('on')))document.documentElement.classList.remove('rl')},8000);
 /* fila: responsável só na Equipe, urgente pela bolinha, concluídas em verde */
 function fila(){
   const v=document.getElementById('cv3');if(!v)return;
